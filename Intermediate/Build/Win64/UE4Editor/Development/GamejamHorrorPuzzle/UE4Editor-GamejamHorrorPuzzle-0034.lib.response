@@ -1,0 +1,21 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-GamejamHorrorPuzzle-0034.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\GamejamHorrorPuzzleEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzle.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleCharacter.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleGameMode.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleHUD.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleProjectile.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzle.init.gen.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleCharacter.gen.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleGameMode.gen.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleHUD.gen.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\GamejamHorrorPuzzleProjectile.gen.cpp.obj"
+"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\Default.rc2.res"
+/OUT:"C:\Users\MyBook Hype AMD\Documents\Game\GamejamHorrorPuzzle\Intermediate\Build\Win64\UE4Editor\Development\GamejamHorrorPuzzle\UE4Editor-GamejamHorrorPuzzle-0034.lib"

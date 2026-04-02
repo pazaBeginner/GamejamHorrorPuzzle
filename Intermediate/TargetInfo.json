@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "GamejamHorrorPuzzle",
+			"Path": "C:\\Users\\MyBook Hype AMD\\Documents\\Game\\GamejamHorrorPuzzle\\Source\\GamejamHorrorPuzzle.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "GamejamHorrorPuzzleEditor",
+			"Path": "C:\\Users\\MyBook Hype AMD\\Documents\\Game\\GamejamHorrorPuzzle\\Source\\GamejamHorrorPuzzleEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
