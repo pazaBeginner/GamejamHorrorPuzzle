@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\GamejamHorrorPuzzle.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{7916484F-CAB0-425E-B04B-DE68BA07C187}</UniqueIdentifier>
+      <UniqueIdentifier>{67B0DD1A-DAD7-43F6-931D-5CDC509ECD22}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\GamejamHorrorPuzzle.Target.cs">
       <Filter>Source</Filter>
@@ -11,8 +11,10 @@
     <None Include="..\..\Source\GamejamHorrorPuzzleEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{58C7408E-5928-469B-9CAB-3A6A5E63CACD}</UniqueIdentifier>
+      <UniqueIdentifier>{FAE2E921-51F8-415E-8E05-4682A6407434}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -30,8 +32,14 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\GamejamHorrorPuzzle">
-      <UniqueIdentifier>{E705020A-6E32-4910-844E-83F325B59FFC}</UniqueIdentifier>
+      <UniqueIdentifier>{2AD09E08-2720-4F69-A89D-676CC4251E57}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\BPI_Interactable.cpp">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\BPI_Interactable.h">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClInclude>
     <None Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzle.Build.cs">
       <Filter>Source\GamejamHorrorPuzzle</Filter>
     </None>
@@ -41,10 +49,22 @@
     <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzle.h">
       <Filter>Source\GamejamHorrorPuzzle</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleCharacter.cpp">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleCharacter.h">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleGameMode.cpp">
       <Filter>Source\GamejamHorrorPuzzle</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleGameMode.h">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleHUD.cpp">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleHUD.h">
       <Filter>Source\GamejamHorrorPuzzle</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleProjectile.cpp">
@@ -53,29 +73,29 @@
     <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleProjectile.h">
       <Filter>Source\GamejamHorrorPuzzle</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Source\GamejamHorrorPuzzle\Player">
-      <UniqueIdentifier>{27f3374a-fdcf-4230-be32-32a113ba3c84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\GamejamHorrorPuzzle\PlayerHUD">
-      <UniqueIdentifier>{56f13a6b-fc6d-4584-8624-4472dd36f7b7}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleCharacter.cpp">
-      <Filter>Source\GamejamHorrorPuzzle\Player</Filter>
+    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\InventoryComponent.cpp">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleHUD.cpp">
-      <Filter>Source\GamejamHorrorPuzzle\PlayerHUD</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleCharacter.h">
-      <Filter>Source\GamejamHorrorPuzzle\Player</Filter>
+    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\InventoryComponent.h">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\GamejamHorrorPuzzleHUD.h">
-      <Filter>Source\GamejamHorrorPuzzle\PlayerHUD</Filter>
+    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\InventorySlotHUD.cpp">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\InventorySlotHUD.h">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\ItemBase.cpp">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\ItemBase.h">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\GamejamHorrorPuzzle\ItemDataStruct.cpp">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GamejamHorrorPuzzle\ItemDataStruct.h">
+      <Filter>Source\GamejamHorrorPuzzle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

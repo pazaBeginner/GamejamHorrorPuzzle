@@ -4,15 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "ItemDataStruct.h"
 #include "GamejamHorrorPuzzleCharacter.generated.h"
 
 class UInputComponent;
 class USkeletalMeshComponent;
 class USceneComponent;
 class UCameraComponent;
+class UStaticMeshComponent;
 class UMotionControllerComponent;
 class UAnimMontage;
 class USoundBase;
+class UInventoryComponent;
+class UUserWidget;
+class UWBP_Inventory;
 
 UCLASS(config=Game)
 class AGamejamHorrorPuzzleCharacter : public ACharacter
@@ -104,6 +109,18 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Interact")
 	float InteractDistance;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interact")
+	UStaticMeshComponent* HeldItemMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
+    UInventoryComponent* PlayerInventory;
+
+	UPROPERTY(EditAnywhere, Category = "UI Inventory")
+	TSubclassOf<UUserWidget> InventoryWidgetClass;
+
+	UPROPERTY(VisibleAnywhere, Category = "UI Inventory")
+	UUserWidget* CurrentInventoryWidget;
+
 protected:
 	/**
 	* Functions
@@ -120,9 +137,31 @@ protected:
 
 	bool PerformLineTrace(FHitResult& HitResult, FVector Start, FVector End, bool DrawDebug = false);
 
+	void ToggleInventory();
+
 	/** Play SFX Footstep **/
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnPlayerMoveSound();
+
+public:
+	/**
+	* Variables
+	*/
+
+	UPROPERTY(BlueprintReadWrite, Category = "Inventory")
+	int32 CurrentlyHeldItemIndex = -1;
+	
+	/**
+	* Functions
+	*/
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void HoldItem(FItemDataStruct ItemData, int32 clickedIndex);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void RemoveItemOnHolding();
+
+
 
 };
 

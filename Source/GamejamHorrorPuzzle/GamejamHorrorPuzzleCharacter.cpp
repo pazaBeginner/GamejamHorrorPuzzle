@@ -2,15 +2,22 @@
 
 #include "GamejamHorrorPuzzleCharacter.h"
 #include "GamejamHorrorPuzzleProjectile.h"
+#include "InventoryComponent.h"
+#include "ItemBase.h"
+#include "ItemDataStruct.h"
+#include "BPI_Interactable.h"
+
 #include "Animation/AnimInstance.h"
+#include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "DrawDebugHelpers.h"
 #include "GameFramework/InputSettings.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
-#include "DrawDebugHelpers.h"
 
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
@@ -47,6 +54,14 @@ AGamejamHorrorPuzzleCharacter::AGamejamHorrorPuzzleCharacter()
 
 	InteractDistance = 500.0f;
 
+	// Inventory
+	PlayerInventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerInventory"));
+
+	// Location Held Item Mesh
+	HeldItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Held Item"));
+	HeldItemMesh->SetupAttachment(FirstPersonCameraComponent);
+	HeldItemMesh->SetRelativeLocation(FVector(50.0f, 0.0f, 0.0f));
+
 }
 
 void AGamejamHorrorPuzzleCharacter::BeginPlay()
@@ -57,6 +72,16 @@ void AGamejamHorrorPuzzleCharacter::BeginPlay()
 	NormalWalkSpeed = GetCharacterMovement()->MaxWalkSpeed;
 
 	bIsCrouched = false;
+
+	// Create the widget inventory
+	if (!CurrentInventoryWidget) {
+        CurrentInventoryWidget = CreateWidget<UUserWidget>(GetWorld(), InventoryWidgetClass);
+
+		if (CurrentInventoryWidget) {
+			CurrentInventoryWidget->AddToViewport();
+			CurrentInventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
+		}
+	}
 
 }
 
@@ -84,6 +109,9 @@ void AGamejamHorrorPuzzleCharacter::SetupPlayerInputComponent(class UInputCompon
 
 	// Bind Interact Event
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AGamejamHorrorPuzzleCharacter::Interact);
+
+	// Bind inventory events
+    PlayerInputComponent->BindAction("Inventory", IE_Pressed, this, &AGamejamHorrorPuzzleCharacter::ToggleInventory);
 
 	// Bind movement events
 	PlayerInputComponent->BindAxis("MoveForward", this, &AGamejamHorrorPuzzleCharacter::MoveForward);
@@ -207,10 +235,22 @@ void AGamejamHorrorPuzzleCharacter::Interact() {
 
 		UE_LOG(LogTemp, Warning, TEXT("LineTrace Hit Something"));
 
-		if (AActor* HitActor = HitResult.GetActor()) {
+		AItemBase* HitItem = Cast<AItemBase>(HitResult.GetActor());
 
-			HitActor->GetName();
-            UE_LOG(LogTemp, Warning, TEXT("Actor Name : %s"), *HitActor->GetName());
+		AActor* HitActor = HitResult.GetActor();
+
+		if (HitItem && PlayerInventory) {
+
+			PlayerInventory->AddItemToInventory(HitItem->ItemData);
+			
+			HitItem->OnPickedUp();
+
+			UE_LOG(LogTemp, Warning, TEXT("Berhasil mengambil: %s"), *HitItem->ItemData.ItemName.ToString())
+		}
+
+		if (HitActor && HitActor->GetClass()->ImplementsInterface(UBPI_Interactable::StaticClass()))
+		{
+			IBPI_Interactable::Execute_ExecuteInteraction(HitActor, this);
 		}
 
 	}
@@ -227,5 +267,62 @@ bool AGamejamHorrorPuzzleCharacter::PerformLineTrace(FHitResult& HitResult, FVec
 	Params.AddIgnoredActor(this);
 
 	return GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_WorldStatic, Params);
+}
+
+void AGamejamHorrorPuzzleCharacter::ToggleInventory()
+{
+
+	if (CurrentInventoryWidget) {
+
+		ESlateVisibility CurrentVisibility = CurrentInventoryWidget->GetVisibility();
+
+		if (CurrentVisibility != ESlateVisibility::Visible) {
+            CurrentInventoryWidget->SetVisibility(ESlateVisibility::Visible);
+
+			APlayerController* PlayerControl = Cast<APlayerController>(GetController());
+
+			PlayerControl->bShowMouseCursor = true;
+			PlayerControl->SetInputMode(FInputModeGameAndUI());
+		}
+		else 
+		{
+			CurrentInventoryWidget->SetVisibility(ESlateVisibility::Collapsed);
+
+			APlayerController* PlayerControl = Cast<APlayerController>(GetController());
+
+			PlayerControl->bShowMouseCursor = false;
+			PlayerControl->SetInputMode(FInputModeGameOnly());
+		}
+
+		PlayerInventory->OnInventoryUpdated.Broadcast();
+	}
+
+}
+
+void AGamejamHorrorPuzzleCharacter::HoldItem(FItemDataStruct ItemData, int32 ClickedIndex)
+{
+	CurrentlyHeldItemIndex = ClickedIndex;
+
+	if (HeldItemMesh) {
+		HeldItemMesh->SetStaticMesh(ItemData.ItemMesh);
+
+		UE_LOG(LogTemp, Warning, TEXT("Sekarang memegang: %s"), *ItemData.ItemName.ToString());
+	}
+
+	PlayerInventory->OnInventoryUpdated.Broadcast();
+}
+
+void AGamejamHorrorPuzzleCharacter::RemoveItemOnHolding() {
+
+	CurrentlyHeldItemIndex = -1;
+
+	if (HeldItemMesh) {
+
+		HeldItemMesh->SetStaticMesh(nullptr);
+
+	}
+
+	PlayerInventory->OnInventoryUpdated.Broadcast();
+
 }
 
